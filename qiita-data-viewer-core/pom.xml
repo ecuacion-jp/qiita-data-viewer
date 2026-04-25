@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>qiita-data-viewer-core</artifactId>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>jp.ecuacion.app.qiita-data-viewer</groupId>
+		<artifactId>qiita-data-viewer-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<properties>
+		<altDeploymentRepository>ecuacion-repo-sftp-private::${repository.ecuacion-repo-sftp-private-root}/profile-${mvn.prof-id}</altDeploymentRepository>
+	</properties>
+	
+	<build>
+		<plugins>
+		
+			<!-- for core or single web / rest project -->
+			<!-- This needs to obtain version from project.version of pom.xml 
+			     and save it to src/main/resources/version.properties. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- maven-source-plugin (outputs a jar of source) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<!-- checkstyle -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			
+			<!-- spotbugs -->
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+			</plugin>
+			
+		</plugins>
+
+		<resources>
+			<resource><directory>src/main/resources</directory></resource>
+			<resource>
+				<directory>src/envs/${mvn.prof-id}/resources</directory>
+				<includes><include>**/*.*</include></includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+
+	</build>
+	<dependencies>
+		
+		<!-- spring boot -->
+		<!-- coreモジュール内で、webarena indigoへのwebアクセスを行う処理を持つためwebモジュールを保持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- dependent modules in the same project -->
+		<dependency>
+			<groupId>jp.ecuacion.app.${app.name}</groupId>
+			<artifactId>${app.name}-base</artifactId>
+		</dependency>
+		
+		<!-- other -->
+
+		<!-- RestTemplateでproxyを使用する場合に必要 -->
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5</artifactId>
+		</dependency>
+		
+	</dependencies>
+</project>

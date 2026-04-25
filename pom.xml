@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>jp.ecuacion.app.qiita-data-viewer</groupId>
+	<artifactId>qiita-data-viewer-parent</artifactId>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>jp.ecuacion.splib</groupId>
+		<artifactId>ecuacion-splib-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../ecuacion-splib</relativePath>
+	</parent>
+	<properties>
+		<java.version>25</java.version>
+		<!-- maven-compiler-plugin referred properties (no need to plugin definition) -->
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+
+		<app.name>qiita-data-viewer</app.name>
+		<app.version>0.0.1-SNAPSHOT</app.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				
+				<!-- checkstyle: setting "private-apps" suppression filter file -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<configuration>
+						<propertiesLocation>${checkstyle.config.site}/checkstyle-for-private-apps.properties</propertiesLocation>
+					</configuration>
+				</plugin>
+			
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+		
+			<!-- dependent modules in the same project -->
+			<dependency>
+				<groupId>jp.ecuacion.app.${app.name}</groupId>
+				<artifactId>${app.name}-core</artifactId>
+				<version>${app.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jp.ecuacion.app.${app.name}</groupId>
+				<artifactId>${app.name}-base</artifactId>
+				<version>${app.version}</version>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>qiita-data-viewer-base</module>
+		<module>qiita-data-viewer-core</module>
+		<module>qiita-data-viewer-batch</module>
+		<module>qiita-data-viewer-web</module>
+	</modules>
+
+</project>

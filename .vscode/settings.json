@@ -1,0 +1,16 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#1a3a1a",
+    "titleBar.activeForeground": "#ffffff",
+    "titleBar.inactiveBackground": "#142814",
+    "activityBar.background": "#1a3a1a",
+    "activityBar.foreground": "#ffffff",
+    "statusBar.background": "#1a3a1a",
+    "statusBar.foreground": "#ffffff",
+    "editorGroupHeader.tabsBackground": "#1e2b1e",
+    "tab.activeBackground": "#252e25",
+    "tab.inactiveBackground": "#1a241a",
+    "sideBar.background": "#1a241a"
+  },
+  "java.compile.nullAnalysis.mode": "disabled"
+}
