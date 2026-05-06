@@ -2,6 +2,9 @@ package jp.ecuacion.app.qiitadataviewer.batch.config;
 
 import jp.ecuacion.app.qiitadataviewer.batch.tasklet.FetchQiitaItemsTasklet;
 import jp.ecuacion.splib.batch.config.SplibAppParentBatchConfig;
+import jp.ecuacion.splib.batch.exceptionhandler.SplibExceptionHandler;
+import jp.ecuacion.splib.batch.listener.SplibJobExecutionListener;
+import jp.ecuacion.splib.batch.listener.SplibStepExecutionListener;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
@@ -17,7 +20,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaRepositories("jp.ecuacion.app.qiitadataviewer.batch.repository")
 @ComponentScan(basePackages = "jp.ecuacion.splib.batch.config"
     + ",jp.ecuacion.app.qiitadataviewer.core.config")
+@SuppressWarnings("NullAway.Init")
 public class AppBatchConfig extends SplibAppParentBatchConfig {
+
+  public AppBatchConfig(SplibJobExecutionListener jobExecutionListener,
+      SplibStepExecutionListener stepExecutionListener, SplibExceptionHandler exceptionHandler) {
+    super(jobExecutionListener, stepExecutionListener, exceptionHandler);
+  }
 
   @Autowired
   private FetchQiitaItemsTasklet fetchQiitaItemsTasklet;
@@ -38,6 +47,7 @@ public class AppBatchConfig extends SplibAppParentBatchConfig {
   }
 
   /** Step 1 of fetchQiitaItemsJob. */
+  @SuppressWarnings("null")
   @Bean
   Step fetchQiitaItemsJobStep1(JobRepository jobRepository,
       PlatformTransactionManager transactionManager) {

@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.*;
 import jp.ecuacion.app.qiitadataviewer.base.record.SystemCommonBaseRecord;
-import jp.ecuacion.lib.jpa.entity.EclibEntity;
+import jp.ecuacion.splib.jpa.entity.SplibEntity;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
@@ -21,7 +21,7 @@ import org.springframework.data.jpa.domain.support.*;
 @Filter(name = "softDeleteFilter")
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class SystemCommon extends EclibEntity implements Serializable {
+public abstract class SystemCommon extends SplibEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
