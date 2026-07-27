@@ -1,5 +1,19 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.entity;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
@@ -10,6 +24,7 @@ import jp.ecuacion.lib.validation.constraints.*;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.jspecify.annotations.NonNull;
 
 @Entity
 @Table(name = "QIITA_ITEM_TAG_VERSION")
@@ -39,7 +54,7 @@ public final class QiitaItemTagVersion extends SystemCommon implements Serializa
   private QiitaItemTag qiitaItemTag = new QiitaItemTag();
 
   @SizeString(min = 0, max = 50)
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   @Column(name = "VERSION_NAME", nullable = true, length = 50)
   protected String versionName;
 
@@ -54,7 +69,7 @@ public final class QiitaItemTagVersion extends SystemCommon implements Serializa
     return new String[] {"id", "accId", "qiitaItemTagId", "versionName", "createAccId", "createTime", "lstUpdAccId", "lstUpdTime", "delFlg", "version"};
   }
 
-  /**defaultコンストラクタ */
+  /**Default constructor. */
   public QiitaItemTagVersion() {}
 
   /** A constructor with record argument */
@@ -130,9 +145,9 @@ public final class QiitaItemTagVersion extends SystemCommon implements Serializa
   }
 
   // getSetOfUniqueConstraintFieldList()
-  // 今は実質naturalKeyしかないのでそれをSetに入れて返す。
-  // 将来的には他のunique keyも設定できるようにする。（でないとinsert時に論理削除済レコードが残っていた場合の自動削除ができない）
-  @Nonnull
+  // Currently only naturalKey is effectively supported, so it is added to the Set and returned.
+  // In the future, other unique keys should also be configurable (otherwise auto-deletion of soft-deleted records on insert would not work).
+  @NonNull
   public Set<List<String>> getSetOfUniqueConstraintFieldList() {
     Set<List<String>> rtnSet = new HashSet<>();
     List<String> list = getNaturalKeyFieldList();

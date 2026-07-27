@@ -1,10 +1,25 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.entity;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 import jp.ecuacion.app.qiitadataviewer.base.record.AgreementBaseRecord;
+import org.jspecify.annotations.NonNull;
 
 @Entity
 @Table(name = "AGREEMENT")
@@ -30,7 +45,7 @@ public final class Agreement extends SystemCommon implements Serializable {
     return new String[] {"id", "uploadedDatetime", "createAccId", "createTime", "lstUpdAccId", "lstUpdTime", "delFlg", "version"};
   }
 
-  /**defaultコンストラクタ */
+  /**Default constructor. */
   public Agreement() {}
 
   /** A constructor with record argument */
@@ -70,9 +85,9 @@ public final class Agreement extends SystemCommon implements Serializable {
   }
 
   // getSetOfUniqueConstraintFieldList()
-  // 今は実質naturalKeyしかないのでそれをSetに入れて返す。
-  // 将来的には他のunique keyも設定できるようにする。（でないとinsert時に論理削除済レコードが残っていた場合の自動削除ができない）
-  @Nonnull
+  // Currently only naturalKey is effectively supported, so it is added to the Set and returned.
+  // In the future, other unique keys should also be configurable (otherwise auto-deletion of soft-deleted records on insert would not work).
+  @NonNull
   public Set<List<String>> getSetOfUniqueConstraintFieldList() {
     Set<List<String>> rtnSet = new HashSet<>();
     List<String> list = getNaturalKeyFieldList();

@@ -1,5 +1,19 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.entity;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
@@ -11,6 +25,7 @@ import jp.ecuacion.lib.validation.constraints.*;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.jspecify.annotations.NonNull;
 
 @Entity
 @Table(name = "QIITA_ITEM", uniqueConstraints = {@UniqueConstraint(columnNames = {"ITEM_ID_IN_QIITA_WEBSITE"})})
@@ -34,8 +49,8 @@ public final class QiitaItem extends SystemCommon implements Serializable {
 
   @NotEmpty
   @SizeString(min = 20, max = 20)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaItemId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaItemId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   @Column(name = "ITEM_ID_IN_QIITA_WEBSITE", nullable = false, length = 20)
   protected String itemIdInQiitaWebsite;
 
@@ -82,7 +97,7 @@ public final class QiitaItem extends SystemCommon implements Serializable {
 
   @NotEmpty
   @SizeString(min = 1, max = 500)
-  @PatternWithDescription(regexp = "^[^'$%&\\(\\)\\^~,<>\\?]*$", description = "longUrl")
+  @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)\\\\^~,<>\\\\?]*$", description = "longUrl")
   @Column(name = "URL", nullable = false, length = 500)
   protected String url;
 
@@ -101,8 +116,8 @@ public final class QiitaItem extends SystemCommon implements Serializable {
   protected String teamMembershipName;
 
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   @Column(name = "ORGANIZATION_URL_NAME", nullable = true, length = 100)
   protected String organizationUrlName;
 
@@ -136,7 +151,7 @@ public final class QiitaItem extends SystemCommon implements Serializable {
     return new String[] {"id", "accId", "itemIdInQiitaWebsite", "coediting", "commentsCount", "createdAt", "qiitaGroupId", "likesCount", "isPrivate", "reactionsCount", "stocksCount", "title", "updatedAt", "url", "qiitaUserId", "pageViewsCount", "teamMembershipName", "organizationUrlName", "isSlide", "createAccId", "createTime", "lstUpdAccId", "lstUpdTime", "delFlg", "version"};
   }
 
-  /**defaultコンストラクタ */
+  /**Default constructor. */
   public QiitaItem() {}
 
   /** A constructor with record argument */
@@ -165,10 +180,10 @@ public final class QiitaItem extends SystemCommon implements Serializable {
   }
 
   /**
-   * naturalKeyを引数にとるコンストラクタ。
-   * naturalKeyとsurrogateKeyのコンストラクタを両方作ると重複する可能性があるため、naturalKeyのみとする。
-   * （surrogateKeyは、insertの際は入力しない、selectの際はEntity.getPk(field)でPk取得、updateの際はselectしたものを使用することから、
-   * naturalKeyよりconstructorの引数に設定したい状況は少ないと思われる） 
+   * Constructor that takes naturalKey as arguments.
+   * Having both a naturalKey and surrogateKey constructor could cause conflicts, so only the naturalKey constructor is provided.
+   * (The surrogateKey is not used on insert; on select it is retrieved via Entity.getPk(field);
+   * on update the selected entity is reused, so there are few scenarios where passing it as a constructor argument is preferred.) 
    */
   public QiitaItem(String itemIdInQiitaWebsite) {
     this();
@@ -383,9 +398,9 @@ public final class QiitaItem extends SystemCommon implements Serializable {
   }
 
   // getSetOfUniqueConstraintFieldList()
-  // 今は実質naturalKeyしかないのでそれをSetに入れて返す。
-  // 将来的には他のunique keyも設定できるようにする。（でないとinsert時に論理削除済レコードが残っていた場合の自動削除ができない）
-  @Nonnull
+  // Currently only naturalKey is effectively supported, so it is added to the Set and returned.
+  // In the future, other unique keys should also be configurable (otherwise auto-deletion of soft-deleted records on insert would not work).
+  @NonNull
   public Set<List<String>> getSetOfUniqueConstraintFieldList() {
     Set<List<String>> rtnSet = new HashSet<>();
     List<String> list = getNaturalKeyFieldList();

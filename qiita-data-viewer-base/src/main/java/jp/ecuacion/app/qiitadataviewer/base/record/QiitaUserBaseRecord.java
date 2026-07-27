@@ -1,3 +1,18 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.record;
 
 import jakarta.validation.Valid;
@@ -19,15 +34,15 @@ public abstract class QiitaUserBaseRecord extends SystemCommonBaseRecord impleme
   @Valid
   protected AccBaseRecord acc;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String userIdInQiitaWebsite;
   @IntegerString
   protected String permanentId;
   @SizeString(min = 1, max = 255)
   protected String name;
   @SizeString(min = 0, max = 65535)
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String description;
   @SizeString(min = 1, max = 255)
   protected String location;
@@ -40,26 +55,26 @@ public abstract class QiitaUserBaseRecord extends SystemCommonBaseRecord impleme
   @IntegerString
   protected String itemsCount;
   @SizeString(min = 1, max = 500)
-  @PatternWithDescription(regexp = "^[^'$%&\\(\\)\\^~,<>\\?]*$", description = "longUrl")
+  @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)\\\\^~,<>\\\\?]*$", description = "longUrl")
   protected String profileImageUrl;
   @SizeString(min = 1, max = 500)
-  @PatternWithDescription(regexp = "^[^'$%&\\(\\)\\^~,<>\\?]*$", description = "longUrl")
+  @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)\\\\^~,<>\\\\?]*$", description = "longUrl")
   protected String websiteUrl;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String twitterScreenName;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String githubLoginName;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String facebookId;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String linkedinId;
   protected Boolean isTeamOnly;
 
@@ -107,7 +122,7 @@ public abstract class QiitaUserBaseRecord extends SystemCommonBaseRecord impleme
     count--;
 
     this.id = (e.getId() == null) ? "" : Long.toString(e.getId());
-    if (count > 0) {
+    if (count > 0 && e.getAcc() != null) {
       this.acc = new AccBaseRecord(e.getAcc(), params, count) {public Item[] customizedItems() {return null;}};
     }
     this.userIdInQiitaWebsite = e.getUserIdInQiitaWebsite();
@@ -126,6 +141,8 @@ public abstract class QiitaUserBaseRecord extends SystemCommonBaseRecord impleme
     this.facebookId = e.getFacebookId();
     this.linkedinId = e.getLinkedinId();
     this.isTeamOnly = e.getIsTeamOnly();
+    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId()}, ","));
+    this.setOptimisticLockVersions(StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, ","));
   }
 
   public QiitaUserBaseRecord(QiitaUserBaseRecord rec) {
@@ -360,25 +377,17 @@ public abstract class QiitaUserBaseRecord extends SystemCommonBaseRecord impleme
     return PropertiesFileUtil.getMessage(locale, "boolean.isTeamOnly." + isTeamOnly);
   }
 
-  public String getIds() {
-    return StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId()}, "-");
-  }
-
+  @Override
   public void setIds(String idCsv) {
-    String[] ids = idCsv.split("-");
+    super.setIds(idCsv);
+    String[] ids = idCsv.split(",", -1);
     if (ids.length < 1) return;
 
     setId(ids[0]);
   }
 
-  public String getOptimisticLockVersions() {
-    return StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, "-");
+  public String getVersionSnapshot() {
+    return getSnapshotSegment(getOptimisticLockVersions(), 0);
   }
 
-  public void setOptimisticLockVersions(String versionCsv) {
-    String[] versions = versionCsv.split("-");
-    if (versions.length < 1) return;
-
-    setVersion(versions[0]);
-  }
 }

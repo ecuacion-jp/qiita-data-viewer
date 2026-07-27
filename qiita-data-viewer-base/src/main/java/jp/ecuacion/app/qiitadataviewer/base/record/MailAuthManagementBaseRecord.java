@@ -1,3 +1,18 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.record;
 
 import java.time.*;
@@ -23,13 +38,13 @@ public abstract class MailAuthManagementBaseRecord extends SystemCommonBaseRecor
   protected String accId;
   protected String authKind;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "code")
-  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "code")
+  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
   protected String authCode;
   protected Boolean isValid;
   protected Boolean hasUsed;
   @SizeString(min = 1, max = 256)
-  @PatternWithDescription(regexp = "^[a-zA-Z0-9_\\-\\+\\.]*@[a-zA-Z0-9_\\-\\.]*$", description = "mailAddress")
+  @PatternWithDescription(regexp = "^[a-zA-Z0-9_\\\\-\\\\+\\\\.]*@[a-zA-Z0-9_\\\\-\\\\.]*$", description = "mailAddress")
   protected String newMailAddress;
   @SizeString(min = 60, max = 60)
   protected String newPassword;
@@ -59,6 +74,8 @@ public abstract class MailAuthManagementBaseRecord extends SystemCommonBaseRecor
     this.newMailAddress = e.getNewMailAddress();
     this.newPassword = e.getNewPassword();
     this.mailSentDatetime = e.getMailSentDatetime() == null ? "" : e.getMailSentDatetime().withOffsetSameInstant(params.getZoneOffset()).format(DateTimeFormatter.ofPattern(dateTimeFormatParams.getDateTimeFormat()));
+    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId()}, ","));
+    this.setOptimisticLockVersions(StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, ","));
   }
 
   public MailAuthManagementBaseRecord(MailAuthManagementBaseRecord rec) {
@@ -186,25 +203,17 @@ public abstract class MailAuthManagementBaseRecord extends SystemCommonBaseRecor
     return PropertiesFileUtil.getMessage(locale, "boolean.hasUsed." + hasUsed);
   }
 
-  public String getIds() {
-    return StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId()}, "-");
-  }
-
+  @Override
   public void setIds(String idCsv) {
-    String[] ids = idCsv.split("-");
+    super.setIds(idCsv);
+    String[] ids = idCsv.split(",", -1);
     if (ids.length < 1) return;
 
     setId(ids[0]);
   }
 
-  public String getOptimisticLockVersions() {
-    return StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, "-");
+  public String getVersionSnapshot() {
+    return getSnapshotSegment(getOptimisticLockVersions(), 0);
   }
 
-  public void setOptimisticLockVersions(String versionCsv) {
-    String[] versions = versionCsv.split("-");
-    if (versions.length < 1) return;
-
-    setVersion(versions[0]);
-  }
 }

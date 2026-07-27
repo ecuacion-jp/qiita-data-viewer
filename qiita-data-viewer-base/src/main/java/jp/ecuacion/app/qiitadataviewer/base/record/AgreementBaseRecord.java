@@ -1,3 +1,18 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.record;
 
 import java.time.*;
@@ -29,6 +44,8 @@ public abstract class AgreementBaseRecord extends SystemCommonBaseRecord impleme
     super(e, params);
     this.id = (e.getId() == null) ? "" : Long.toString(e.getId());
     this.uploadedDatetime = e.getUploadedDatetime() == null ? "" : e.getUploadedDatetime().withOffsetSameInstant(params.getZoneOffset()).format(DateTimeFormatter.ofPattern(dateTimeFormatParams.getDateTimeFormat()));
+    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId()}, ","));
+    this.setOptimisticLockVersions(StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, ","));
   }
 
   public AgreementBaseRecord(AgreementBaseRecord rec) {
@@ -61,25 +78,17 @@ public abstract class AgreementBaseRecord extends SystemCommonBaseRecord impleme
     return (getUploadedDatetime() == null || getUploadedDatetime().equals("")) ? null : OffsetDateTime.parse(uploadedDatetime, DateTimeFormatter.ofPattern(dateTimeFormatParams.getDateTimeFormat()));
   }
 
-  public String getIds() {
-    return StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId()}, "-");
-  }
-
+  @Override
   public void setIds(String idCsv) {
-    String[] ids = idCsv.split("-");
+    super.setIds(idCsv);
+    String[] ids = idCsv.split(",", -1);
     if (ids.length < 1) return;
 
     setId(ids[0]);
   }
 
-  public String getOptimisticLockVersions() {
-    return StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, "-");
+  public String getVersionSnapshot() {
+    return getSnapshotSegment(getOptimisticLockVersions(), 0);
   }
 
-  public void setOptimisticLockVersions(String versionCsv) {
-    String[] versions = versionCsv.split("-");
-    if (versions.length < 1) return;
-
-    setVersion(versions[0]);
-  }
 }

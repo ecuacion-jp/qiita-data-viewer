@@ -1,3 +1,18 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.base.record;
 
 import jakarta.validation.Valid;
@@ -53,15 +68,17 @@ public abstract class QiitaItemTagBaseRecord extends SystemCommonBaseRecord impl
     count--;
 
     this.id = (e.getId() == null) ? "" : Long.toString(e.getId());
-    if (count > 0) {
+    if (count > 0 && e.getAcc() != null) {
       this.acc = new AccBaseRecord(e.getAcc(), params, count) {public Item[] customizedItems() {return null;}};
     }
-    if (count > 0) {
+    if (count > 0 && e.getQiitaItem() != null) {
       this.qiitaItem = new QiitaItemBaseRecord(e.getQiitaItem(), params, count) {public Item[] customizedItems() {return null;}};
     }
-    if (count > 0) {
+    if (count > 0 && e.getQiitaTag() != null) {
       this.qiitaTag = new QiitaTagBaseRecord(e.getQiitaTag(), params, count) {public Item[] customizedItems() {return null;}};
     }
+    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId(), getQiitaItem() == null || getQiitaItem().getId() == null ? "" : getQiitaItem().getId(), getQiitaTag() == null || getQiitaTag().getId() == null ? "" : getQiitaTag().getId()}, ","));
+    this.setOptimisticLockVersions(StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion(), getQiitaItem() == null || getQiitaItem().getVersion() == null ? "" : getQiitaItem().getVersion(), getQiitaTag() == null || getQiitaTag().getVersion() == null ? "" : getQiitaTag().getVersion()}, ","));
   }
 
   public QiitaItemTagBaseRecord(QiitaItemTagBaseRecord rec) {
@@ -158,29 +175,33 @@ public abstract class QiitaItemTagBaseRecord extends SystemCommonBaseRecord impl
     this.qiitaTag = qiitaTag;
   }
 
-  public String getIds() {
-    return StringUtil.getSeparatedValuesString(new String[] {getId() == null ? "" : getId(), getQiitaItem() == null || getQiitaItem().getId() == null? "" : getQiitaItem().getId(), getQiitaTag() == null || getQiitaTag().getId() == null? "" : getQiitaTag().getId()}, "-");
-  }
-
+  @Override
   public void setIds(String idCsv) {
-    String[] ids = idCsv.split("-");
-    if (ids.length < 3) return;
+    super.setIds(idCsv);
+    String[] ids = idCsv.split(",", -1);
+    if (ids.length < 1) return;
 
     setId(ids[0]);
-    getQiitaItem().setId(ids[1]);
-    getQiitaTag().setId(ids[2]);
   }
 
-  public String getOptimisticLockVersions() {
-    return StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion(), getQiitaItem() == null || getQiitaItem().getVersion() == null ? "" : getQiitaItem().getVersion(), getQiitaTag() == null || getQiitaTag().getVersion() == null ? "" : getQiitaTag().getVersion()}, "-");
+  public String getVersionSnapshot() {
+    return getSnapshotSegment(getOptimisticLockVersions(), 0);
   }
 
-  public void setOptimisticLockVersions(String versionCsv) {
-    String[] versions = versionCsv.split("-");
-    if (versions.length < 3) return;
-
-    setVersion(versions[0]);
-    getQiitaItem().setVersion(versions[1]);
-    getQiitaTag().setVersion(versions[2]);
+  public String getQiitaItemIdSnapshot() {
+    return getSnapshotSegment(getIds(), 1);
   }
+
+  public String getQiitaItemVersionSnapshot() {
+    return getSnapshotSegment(getOptimisticLockVersions(), 1);
+  }
+
+  public String getQiitaTagIdSnapshot() {
+    return getSnapshotSegment(getIds(), 2);
+  }
+
+  public String getQiitaTagVersionSnapshot() {
+    return getSnapshotSegment(getOptimisticLockVersions(), 2);
+  }
+
 }
