@@ -1,26 +1,42 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.core.model;
 
 import java.util.List;
+import org.jspecify.annotations.Nullable;
 
 public class QiitaTag {
 
-  private String name;
+  private @Nullable String name;
 
-  private List<String> versions;
+  private @Nullable List<String> versions;
 
-  public String getName() {
+  public @Nullable String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(@Nullable String name) {
     this.name = name;
   }
 
-  public List<String> getVersions() {
+  public @Nullable List<String> getVersions() {
     return versions;
   }
 
-  public void setVersions(List<String> versions) {
+  public void setVersions(@Nullable List<String> versions) {
     this.versions = versions;
   }
 }

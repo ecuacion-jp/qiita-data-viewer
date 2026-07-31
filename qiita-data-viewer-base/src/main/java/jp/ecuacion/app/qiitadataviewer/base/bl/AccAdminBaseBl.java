@@ -33,7 +33,7 @@ public abstract class AccAdminBaseBl extends SystemCommonBaseBl<AccAdmin, Long> 
   }
 
   public AccAdmin findAndOptimisticLockingCheck(AccAdminBaseRecord rec) {
-    return findAndOptimisticLockingCheck(rec.getAccIdOfEntityDataType(), rec.getVersionOfEntityDataType());
+    return findAndOptimisticLockingCheck(rec.getAccIdOfEntityDataType(), rec.getVersionSnapshot() == null || rec.getVersionSnapshot().equals("") ? null : Long.valueOf(rec.getVersionSnapshot()));
   }
 
   /** Is a utility to insert or update an entity. */

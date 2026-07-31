@@ -1,13 +1,29 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.core.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.jspecify.annotations.Nullable;
 
 public class QiitaUser {
 
-  private String description;
+  private @Nullable String description;
 
   @JsonProperty("facebook_id")
-  private String facebookId;
+  private @Nullable String facebookId;
 
   @JsonProperty("followees_count")
   private int followeesCount;
@@ -16,50 +32,50 @@ public class QiitaUser {
   private int followersCount;
 
   @JsonProperty("github_login_name")
-  private String githubLoginName;
+  private @Nullable String githubLoginName;
 
-  private String id;
+  private @Nullable String id;
 
   @JsonProperty("items_count")
   private int itemsCount;
 
   @JsonProperty("linkedin_id")
-  private String linkedinId;
+  private @Nullable String linkedinId;
 
-  private String location;
+  private @Nullable String location;
 
-  private String name;
+  private @Nullable String name;
 
-  private String organization;
+  private @Nullable String organization;
 
   @JsonProperty("permanent_id")
   private int permanentId;
 
   @JsonProperty("profile_image_url")
-  private String profileImageUrl;
+  private @Nullable String profileImageUrl;
 
   @JsonProperty("team_only")
   private boolean teamOnly;
 
   @JsonProperty("twitter_screen_name")
-  private String twitterScreenName;
+  private @Nullable String twitterScreenName;
 
   @JsonProperty("website_url")
-  private String websiteUrl;
+  private @Nullable String websiteUrl;
 
-  public String getDescription() {
+  public @Nullable String getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(@Nullable String description) {
     this.description = description;
   }
 
-  public String getFacebookId() {
+  public @Nullable String getFacebookId() {
     return facebookId;
   }
 
-  public void setFacebookId(String facebookId) {
+  public void setFacebookId(@Nullable String facebookId) {
     this.facebookId = facebookId;
   }
 
@@ -79,19 +95,19 @@ public class QiitaUser {
     this.followersCount = followersCount;
   }
 
-  public String getGithubLoginName() {
+  public @Nullable String getGithubLoginName() {
     return githubLoginName;
   }
 
-  public void setGithubLoginName(String githubLoginName) {
+  public void setGithubLoginName(@Nullable String githubLoginName) {
     this.githubLoginName = githubLoginName;
   }
 
-  public String getId() {
+  public @Nullable String getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(@Nullable String id) {
     this.id = id;
   }
 
@@ -103,35 +119,35 @@ public class QiitaUser {
     this.itemsCount = itemsCount;
   }
 
-  public String getLinkedinId() {
+  public @Nullable String getLinkedinId() {
     return linkedinId;
   }
 
-  public void setLinkedinId(String linkedinId) {
+  public void setLinkedinId(@Nullable String linkedinId) {
     this.linkedinId = linkedinId;
   }
 
-  public String getLocation() {
+  public @Nullable String getLocation() {
     return location;
   }
 
-  public void setLocation(String location) {
+  public void setLocation(@Nullable String location) {
     this.location = location;
   }
 
-  public String getName() {
+  public @Nullable String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(@Nullable String name) {
     this.name = name;
   }
 
-  public String getOrganization() {
+  public @Nullable String getOrganization() {
     return organization;
   }
 
-  public void setOrganization(String organization) {
+  public void setOrganization(@Nullable String organization) {
     this.organization = organization;
   }
 
@@ -143,11 +159,11 @@ public class QiitaUser {
     this.permanentId = permanentId;
   }
 
-  public String getProfileImageUrl() {
+  public @Nullable String getProfileImageUrl() {
     return profileImageUrl;
   }
 
-  public void setProfileImageUrl(String profileImageUrl) {
+  public void setProfileImageUrl(@Nullable String profileImageUrl) {
     this.profileImageUrl = profileImageUrl;
   }
 
@@ -159,19 +175,19 @@ public class QiitaUser {
     this.teamOnly = teamOnly;
   }
 
-  public String getTwitterScreenName() {
+  public @Nullable String getTwitterScreenName() {
     return twitterScreenName;
   }
 
-  public void setTwitterScreenName(String twitterScreenName) {
+  public void setTwitterScreenName(@Nullable String twitterScreenName) {
     this.twitterScreenName = twitterScreenName;
   }
 
-  public String getWebsiteUrl() {
+  public @Nullable String getWebsiteUrl() {
     return websiteUrl;
   }
 
-  public void setWebsiteUrl(String websiteUrl) {
+  public void setWebsiteUrl(@Nullable String websiteUrl) {
     this.websiteUrl = websiteUrl;
   }
 }

@@ -24,7 +24,7 @@ import jp.ecuacion.lib.validation.constraints.*;
 @Documented
 @Constraint(validatedBy = {})
 @SizeString(min = 1, max = 100)
-@PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+@PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
 public @interface QiitaTagNameDataTypeValidator {
 
   String message() default "";

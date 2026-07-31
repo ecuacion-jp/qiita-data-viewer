@@ -48,7 +48,7 @@ public final class QiitaTag extends SystemCommon implements Serializable {
 
   @NotEmpty
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
   @Column(name = "NAME", nullable = false, length = 100)
   protected String name;
 

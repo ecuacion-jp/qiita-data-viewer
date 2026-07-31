@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+</head>
+<body>
+
+	<div th:fragment="nav-bar-public" th:remove="tag">
+		<div th:replace="~{bootstrap/components :: navbarMenuItem(@{/public/login/page}, #{LOGIN_TITLE}, '')}"></div>
+	</div>
+
+	<div th:fragment="nav-bar-account" th:remove="tag">
+		<div th:replace="~{bootstrap/components :: navbarMenuItem(@{/account/qiitaItem/searchList/page}, #{NAVBAR_L1_QIITA_ITEM}, '')}"></div>
+	</div>
+
+	<div th:fragment="nav-bar-admin" th:remove="tag">
+		<div th:replace="~{bootstrap/components :: navbarMenuItem(@{/admin/accGeneral/searchList/page}, #{NAVBAR_L1_ACC_GENERAL}, '')}"></div>
+		<div th:replace="~{bootstrap/components :: navbarMenuItem(@{/admin/accAdmin/searchList/page}, #{NAVBAR_L1_ACC_ADMIN}, '')}"></div>
+	</div>
+
+	<div th:fragment="nav-bar-public-right" th:remove="tag">
+	</div>
+
+	<div th:fragment="nav-bar-account-right" th:remove="tag">
+		<div th:replace="~{ :: navBarRightCommon(false)}"></div>
+	</div>
+
+	<div th:fragment="nav-bar-admin-right" th:remove="tag">
+		<div th:replace="~{ :: navBarRightCommon(true)}"></div>
+	</div>
+
+	<div th:fragment="navBarRightCommon(isAdmin)" th:remove="tag" th:with="imagePath=@{/images/person-fill.svg}">
+		<div th:replace="~{bootstrap/components :: navbarSubMenu('', ~{:: fragmentNavbarRight}, 'position=right,imagePath=__${imagePath}__')}"></div>
+
+		<th:block th:if="false"><div th:fragment="fragmentNavbarRight" th:remove="tag">
+			<div th:replace="~{bootstrap/components :: navbarDropDownMenuItem('', 'account: ' + ${loginAcc.acc.name}, 'method=none')}"></div>
+			<div th:replace="~{bootstrap/components :: navbarDropDownMenuDivider('')}"></div>
+			<div th:replace="~{bootstrap/components :: navbarDropDownMenuItem(@{/public} + '/' + ${isAdmin ? 'adminLogout' : 'logout'}, #{NAVBAR_L1_LOGOUT}, 'method=post')}"></div>
+			<div sec:authorize="hasRole('ROLE_PREVIOUS_ADMINISTRATOR')" th:replace="~{bootstrap/components :: navbarDropDownMenuItem(@{/account/exitUser}, #{NAVBAR_L1_EXIT_USER}, 'method=post')}"></div>
+		</div></th:block>
+	</div>
+
+	<div th:fragment="footer-string" th:remove="tag">
+			 © [[${#temporals.year(#temporals.createNow())}]] ecuacion consulting  All rights reserved.
+	</div>
+</body>
+</html>

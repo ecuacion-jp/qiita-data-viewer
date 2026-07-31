@@ -33,7 +33,7 @@ public abstract class QiitaItemTagVersionBaseBl extends SystemCommonBaseBl<Qiita
   }
 
   public QiitaItemTagVersion findAndOptimisticLockingCheck(QiitaItemTagVersionBaseRecord rec) {
-    return findAndOptimisticLockingCheck(rec.getIdOfEntityDataType(), rec.getVersionOfEntityDataType());
+    return findAndOptimisticLockingCheck(rec.getIdOfEntityDataType(), rec.getVersionSnapshot() == null || rec.getVersionSnapshot().equals("") ? null : Long.valueOf(rec.getVersionSnapshot()));
   }
 
   /** Is a utility to insert or update an entity. */

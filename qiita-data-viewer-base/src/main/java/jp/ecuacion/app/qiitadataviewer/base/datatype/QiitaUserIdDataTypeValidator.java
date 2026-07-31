@@ -24,8 +24,8 @@ import jp.ecuacion.lib.validation.constraints.*;
 @Documented
 @Constraint(validatedBy = {})
 @SizeString(min = 1, max = 100)
-@PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "qiitaUserId")
-@PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+@PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "qiitaUserId")
+@PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
 public @interface QiitaUserIdDataTypeValidator {
 
   String message() default "";

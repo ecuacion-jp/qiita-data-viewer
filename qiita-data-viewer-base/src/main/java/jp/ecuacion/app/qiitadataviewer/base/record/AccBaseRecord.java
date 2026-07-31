@@ -42,7 +42,7 @@ public abstract class AccBaseRecord extends SystemCommonBaseRecord implements It
   protected String mailAddress;
   @SizeString(min = 1, max = 30)
   @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)=\\\\^~,<>/\\\\?]*$", description = "accName")
-  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
   protected String name;
   protected Boolean isAdmin;
   protected String role;

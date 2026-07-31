@@ -39,7 +39,7 @@ public abstract class QiitaGroupBaseBl extends SystemCommonBaseBl<QiitaGroup, Lo
   }
 
   public QiitaGroup findAndOptimisticLockingCheck(QiitaGroupBaseRecord rec) {
-    return findAndOptimisticLockingCheck(rec.getIdOfEntityDataType(), rec.getVersionOfEntityDataType());
+    return findAndOptimisticLockingCheck(rec.getIdOfEntityDataType(), rec.getVersionSnapshot() == null || rec.getVersionSnapshot().equals("") ? null : Long.valueOf(rec.getVersionSnapshot()));
   }
 
   /** Is a utility to insert or update an entity. */

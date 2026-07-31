@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{bootstrap/page-edit-wide}"
+		th:with="
+			title=#{ACC_ADMIN_EDIT_TITLE},
+			titleDesc=#{ACC_ADMIN_EDIT_TITLE_DESC},
+		">
+
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+
+	<div layout:fragment="edit-fields-content" th:remove="tag">
+		<div class="row">
+			<th:block th:if="${!isInsert}">
+				<div th:replace="~{bootstrap/components-input :: inputText('accId', 'readOnly')}"></div>
+			</th:block>
+			<div th:replace="~{bootstrap/components-input :: inputText('acc.name', '')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('acc.mailAddress', '')}"></div>
+		</div>
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputSelectFromEnum('acc.role', 'including=ADMIN_FULL_ACCESS')}"></div>
+		</div>
+		<th:block th:if="${isInsert}">
+			<div class="row">
+				<div th:replace="~{bootstrap/components-input :: inputPassword('rawPassword', '')}"></div>
+			</div>
+		</th:block>
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputSwitch('acc.isValid', '')}"></div>
+			<th:block th:if="${!isInsert}">
+				<div th:replace="~{bootstrap/components-input :: inputSwitch('acc.isAuthenticated', 'readOnly')}"></div>
+				<div th:replace="~{bootstrap/components-input :: inputSwitch('acc.hasLoggedIn', 'readOnly')}"></div>
+			</th:block>
+		</div>
+
+		<div th:replace="~{splib-web/app-parts :: editPageCommonItems}"></div>
+		<div th:replace="~{splib-web/app-parts :: editPageCommonItemsForAcc}"></div>
+	</div>
+
+	<div layout:fragment="edit-buttons-content" th:remove="tag">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4 d-flex justify-content-center">
+				<div th:replace="~{bootstrap/components-edit :: insertOrUpdateButton(${isInsert}, '')}"></div>
+			</div>
+			<div class="col-4 d-flex justify-content-end">
+				<div th:replace="~{bootstrap/components-edit :: backButton('')}"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

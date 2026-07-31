@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{bootstrap/page-general-narrow}"
+		th:with="title=#{LOGIN_TITLE}">
+
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<div layout:fragment="form-content" th:remove="tag">
+		<div th:replace="~{bootstrap/components :: subtitle('LOGIN_SUBTITLE_SSO', '')}"></div>
+		<div th:replace="~{splib-web/oauth2-login-buttons :: oauth2LoginButtons}"></div>
+	</div>
+
+	<div layout:fragment="scripts" th:remove="tag">
+		<div th:replace="~{bootstrap/components :: sendZoneOffset('')}"></div>
+	</div>
+</body>
+</html>

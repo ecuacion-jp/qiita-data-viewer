@@ -24,7 +24,7 @@ import jp.ecuacion.lib.validation.constraints.*;
 @Documented
 @Constraint(validatedBy = {})
 @SizeString(max = 100)
-@PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "domain")
+@PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "domain")
 public @interface DomainDataTypeValidator {
 
   String message() default "";

@@ -33,7 +33,7 @@ public abstract class QiitaItemTagVersionBaseRecord extends SystemCommonBaseReco
   @Valid
   protected QiitaItemTagBaseRecord qiitaItemTag;
   @SizeString(min = 0, max = 50)
-  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
   protected String versionName;
 
   static {

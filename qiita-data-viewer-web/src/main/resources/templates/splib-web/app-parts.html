@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+</head>
+<body>
+
+	<div th:fragment="listPageHeaderCommonItems" th:remove="tag">
+		<th th:replace="~{bootstrap/components-list :: headerSortable('lstUpdTime', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('lstUpdAccName', '')}"></th>
+	</div>
+
+	<div th:fragment="listPageHeaderCommonItemsForAcc" th:remove="tag">
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.lstUpdTime', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.lstUpdAccName', '')}"></th>
+	</div>
+
+	<div th:fragment="listPageBodyCommonItems" th:remove="tag">
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyFixedLength('lstUpdTime', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyText('lstUpdAccName', '')}"></td>
+	</div>
+
+	<div th:fragment="listPageBodyCommonItemsForAcc" th:remove="tag">
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyFixedLength('acc.lstUpdTime', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyText('acc.lstUpdAccName', '')}"></td>
+	</div>
+
+	<div th:fragment="editPageCommonItems" th:remove="tag">
+		<th:block th:if="${!isInsert}">
+			<div th:replace="~{bootstrap/components :: subtitle('SYSTEM_COMMON_INFO_TITLE', '')}"></div>
+				<div class="row mt-3">
+					<div th:replace="~{bootstrap/components-input :: inputText('createTime', 'readOnly')}"></div>
+					<div th:replace="~{bootstrap/components-input :: inputText('createAccName', 'readOnly')}"></div>
+					<div th:replace="~{bootstrap/components-input :: inputText('lstUpdTime', 'readOnly')}"></div>
+					<div th:replace="~{bootstrap/components-input :: inputText('lstUpdAccName', 'readOnly')}"></div>
+				</div>
+			</div>
+		</th:block>
+	</div>
+
+	<div th:fragment="editPageCommonItemsForAcc" th:remove="tag">
+		<th:block th:if="${!isInsert}">
+			<div th:replace="~{bootstrap/components :: subtitle('SYSTEM_COMMON_INFO_TITLE_ACC', '')}"></div>
+				<div class="row mt-3">
+					<div th:replace="~{bootstrap/components-input :: inputText('acc.createTime', 'readOnly')}"></div>
+					<div th:replace="~{bootstrap/components-input :: inputText('acc.createAccName', 'readOnly')}"></div>
+					<div th:replace="~{bootstrap/components-input :: inputText('acc.lstUpdTime', 'readOnly')}"></div>
+					<div th:replace="~{bootstrap/components-input :: inputText('acc.lstUpdAccName', 'readOnly')}"></div>
+				</div>
+			</div>
+		</th:block>
+	</div>
+
+</body>
+</html>

@@ -24,7 +24,7 @@ import jp.ecuacion.lib.validation.constraints.*;
 @Documented
 @Constraint(validatedBy = {})
 @SizeString(min = 1, max = 100)
-@PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\\\[-\\\\`\\\\{-\\\\~]*$", description = "url")
+@PatternWithDescription(regexp = "^[a-zA-Z0-9 -/:-@\\[-\\`\\{-\\~]*$", description = "url")
 @PatternWithDescription(regexp = "^[a-zA-Z0-9 _@/=\\\\-\\\\.¥¥?¥¥&]*$", description = "url")
 public @interface UrlDataTypeValidator {
 

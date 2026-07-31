@@ -33,7 +33,7 @@ public abstract class AccGeneralBaseBl extends SystemCommonBaseBl<AccGeneral, Lo
   }
 
   public AccGeneral findAndOptimisticLockingCheck(AccGeneralBaseRecord rec) {
-    return findAndOptimisticLockingCheck(rec.getAccIdOfEntityDataType(), rec.getVersionOfEntityDataType());
+    return findAndOptimisticLockingCheck(rec.getAccIdOfEntityDataType(), rec.getVersionSnapshot() == null || rec.getVersionSnapshot().equals("") ? null : Long.valueOf(rec.getVersionSnapshot()));
   }
 
   /** Is a utility to insert or update an entity. */

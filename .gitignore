@@ -144,3 +144,8 @@ products/
 # sass
 .sass-cache/
 
+# vscode
+.vscode
+
+# allure
+.allure

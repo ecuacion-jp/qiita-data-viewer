@@ -1,3 +1,18 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.batch.tasklet;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -23,10 +38,12 @@ import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaItemTagRepository;
 import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaItemTagVersionRepository;
 import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaTagRepository;
 import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaUserRepository;
-import org.springframework.batch.core.StepContribution;
+import jp.ecuacion.lib.core.util.ObjectsUtil;
+import org.jspecify.annotations.Nullable;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.StepContribution;
 import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.batch.infrastructure.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -36,9 +53,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Tasklet {
 
+  @SuppressWarnings("null")
   @Value("${qiita.access-token}")
   private String accessToken;
 
+  @SuppressWarnings("null")
   @Value("${qiita.account.mail-address}")
   private String accountMailAddress;
 
@@ -129,8 +148,9 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
     return RepeatStatus.FINISHED;
   }
 
+  @SuppressWarnings("null")
   private void saveItem(jp.ecuacion.app.qiitadataviewer.core.model.QiitaItem apiItem, Acc acc) {
-    QiitaUser qiitaUser = upsertQiitaUser(apiItem.getUser(), acc);
+    QiitaUser qiitaUser = upsertQiitaUser(ObjectsUtil.requireNonNull(apiItem.getUser()), acc);
     QiitaGroup qiitaGroup =
         apiItem.getGroup() != null ? upsertQiitaGroup(apiItem.getGroup(), acc) : null;
     QiitaItem qiitaItem = upsertQiitaItem(apiItem, acc, qiitaUser, qiitaGroup);
@@ -146,7 +166,8 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
 
   private QiitaUser upsertQiitaUser(jp.ecuacion.app.qiitadataviewer.core.model.QiitaUser src,
       Acc acc) {
-    QiitaUser entity = qiitaUserRepository.findByUserIdInQiitaWebsite(src.getId()).orElse(new QiitaUser());
+    QiitaUser entity =
+        qiitaUserRepository.findByUserIdInQiitaWebsite(src.getId()).orElse(new QiitaUser());
     entity.setAcc(acc);
     entity.setUserIdInQiitaWebsite(src.getId());
     entity.setPermanentId(src.getPermanentId());
@@ -185,9 +206,11 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
     return qiitaGroupRepository.save(entity);
   }
 
+  @SuppressWarnings("null")
   private QiitaItem upsertQiitaItem(jp.ecuacion.app.qiitadataviewer.core.model.QiitaItem src,
-      Acc acc, QiitaUser qiitaUser, QiitaGroup qiitaGroup) {
-    QiitaItem entity = qiitaItemRepository.findByItemIdInQiitaWebsite(src.getId()).orElse(new QiitaItem());
+      Acc acc, QiitaUser qiitaUser, @Nullable QiitaGroup qiitaGroup) {
+    QiitaItem entity =
+        qiitaItemRepository.findByItemIdInQiitaWebsite(src.getId()).orElse(new QiitaItem());
     entity.setAcc(acc);
     entity.setItemIdInQiitaWebsite(src.getId());
     entity.setCoediting(src.isCoediting());
@@ -234,6 +257,7 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
     return qiitaItemTagRepository.save(entity);
   }
 
+  @SuppressWarnings("null")
   private void upsertQiitaItemTagVersions(
       jp.ecuacion.app.qiitadataviewer.core.model.QiitaTag apiTag, QiitaItemTag qiitaItemTag,
       Acc acc) {

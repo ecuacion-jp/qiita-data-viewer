@@ -63,7 +63,7 @@ public abstract class AccGeneralBaseRecord extends SystemCommonBaseRecord implem
       this.acc = new AccBaseRecord(e.getAcc(), params, count) {public Item[] customizedItems() {return null;}};
     }
     this.accessibleToAllApps = e.getAccessibleToAllApps();
-    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getAcc().getId() == null ? "" : getAcc().getId()}, ","));
+    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getAcc() == null || getAcc().getId() == null ? "" : getAcc().getId()}, ","));
     this.setOptimisticLockVersions(StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, ","));
   }
 
@@ -125,7 +125,9 @@ public abstract class AccGeneralBaseRecord extends SystemCommonBaseRecord implem
     String[] ids = idCsv.split(",", -1);
     if (ids.length < 1) return;
 
-    getAcc().setId(ids[0]);
+    if (getAcc() != null) {
+      getAcc().setId(ids[0]);
+    }
   }
 
   public String getVersionSnapshot() {

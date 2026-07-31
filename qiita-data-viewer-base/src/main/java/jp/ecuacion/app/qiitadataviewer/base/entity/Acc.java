@@ -63,7 +63,7 @@ public final class Acc extends SystemCommon implements Serializable {
   @NotEmpty
   @SizeString(min = 1, max = 30)
   @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)=\\\\^~,<>/\\\\?]*$", description = "accName")
-  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
   @Column(name = "NAME", nullable = false, length = 30)
   protected String name;
 

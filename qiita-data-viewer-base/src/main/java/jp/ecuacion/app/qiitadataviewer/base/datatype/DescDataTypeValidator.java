@@ -25,7 +25,7 @@ import jp.ecuacion.lib.validation.constraints.*;
 @Constraint(validatedBy = {})
 @SizeString(min = 1, max = 100)
 @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)=\\\\^~,<>/\\\\?]*$", description = "desc")
-@PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+@PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
 public @interface DescDataTypeValidator {
 
   String message() default "";

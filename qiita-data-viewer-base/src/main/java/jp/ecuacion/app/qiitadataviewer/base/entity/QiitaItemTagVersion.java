@@ -54,7 +54,7 @@ public final class QiitaItemTagVersion extends SystemCommon implements Serializa
   private QiitaItemTag qiitaItemTag = new QiitaItemTag();
 
   @SizeString(min = 0, max = 50)
-  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
   @Column(name = "VERSION_NAME", nullable = true, length = 50)
   protected String versionName;
 

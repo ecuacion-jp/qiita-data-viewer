@@ -31,7 +31,7 @@ public abstract class QiitaTagBaseRecord extends SystemCommonBaseRecord implemen
   @Valid
   protected AccBaseRecord acc;
   @SizeString(min = 1, max = 100)
-  @PatternWithDescription(regexp = "^[^!\\\"#\\\\$%&\\\\(\\\\)=\\\\^~\\\\\\\\\\\\|`\\\\[\\\\{;\\\\+:\\\\\\\\*\\\\]\\\\},<>/\\\\?]*$", description = "prohibitedChars")
+  @PatternWithDescription(regexp = "^[^!\"#\\$%&\\(\\)=\\^~\\\\\\|`\\[\\{;\\+:\\\\*\\]\\},<>/\\?]*$", description = "prohibitedChars")
   protected String name;
 
   static {

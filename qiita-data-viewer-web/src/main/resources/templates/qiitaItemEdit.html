@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{bootstrap/page-edit-wide}"
+		th:with="
+			title=#{QIITA_ITEM_EDIT_TITLE},
+			titleDesc=#{QIITA_ITEM_EDIT_TITLE_DESC},
+		">
+
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+
+	<div layout:fragment="edit-fields-content" th:remove="tag">
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputText('id', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('title', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('url', 'readOnly')}"></div>
+		</div>
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputText('likesCount', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('stocksCount', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('pageViewsCount', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('commentsCount', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('reactionsCount', 'readOnly')}"></div>
+		</div>
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputSwitch('isPrivate', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputSwitch('isSlide', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputSwitch('coediting', 'readOnly')}"></div>
+		</div>
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputText('createdAt', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('updatedAt', 'readOnly')}"></div>
+		</div>
+		<div class="row">
+			<div th:replace="~{bootstrap/components-input :: inputText('qiitaUser.name', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('teamMembershipName', 'readOnly')}"></div>
+			<div th:replace="~{bootstrap/components-input :: inputText('organizationUrlName', 'readOnly')}"></div>
+		</div>
+
+		<div th:replace="~{splib-web/app-parts :: editPageCommonItems}"></div>
+	</div>
+
+	<div layout:fragment="edit-buttons-content" th:remove="tag">
+		<div class="d-flex justify-content-center">
+			<div th:replace="~{bootstrap/components-edit :: backButton('')}"></div>
+		</div>
+	</div>
+</body>
+</html>

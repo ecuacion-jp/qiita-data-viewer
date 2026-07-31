@@ -58,7 +58,7 @@ public abstract class AccAdminBaseRecord extends SystemCommonBaseRecord implemen
     if (count > 0 && e.getAcc() != null) {
       this.acc = new AccBaseRecord(e.getAcc(), params, count) {public Item[] customizedItems() {return null;}};
     }
-    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getAcc().getId() == null ? "" : getAcc().getId()}, ","));
+    this.setIds(StringUtil.getSeparatedValuesString(new String[] {getAcc() == null || getAcc().getId() == null ? "" : getAcc().getId()}, ","));
     this.setOptimisticLockVersions(StringUtil.getSeparatedValuesString(new String[] {getVersion() == null ? "" : getVersion()}, ","));
   }
 
@@ -102,7 +102,9 @@ public abstract class AccAdminBaseRecord extends SystemCommonBaseRecord implemen
     String[] ids = idCsv.split(",", -1);
     if (ids.length < 1) return;
 
-    getAcc().setId(ids[0]);
+    if (getAcc() != null) {
+      getAcc().setId(ids[0]);
+    }
   }
 
   public String getVersionSnapshot() {

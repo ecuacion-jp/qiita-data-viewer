@@ -1,14 +1,30 @@
+/*
+ * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jp.ecuacion.app.qiitadataviewer.core.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import org.jspecify.annotations.Nullable;
 
 public class QiitaItem {
 
   @JsonProperty("rendered_body")
-  private String renderedBody;
+  private @Nullable String renderedBody;
 
-  private String body;
+  private @Nullable String body;
 
   private boolean coediting;
 
@@ -16,11 +32,11 @@ public class QiitaItem {
   private int commentsCount;
 
   @JsonProperty("created_at")
-  private String createdAt;
+  private @Nullable String createdAt;
 
-  private QiitaGroup group;
+  private @Nullable QiitaGroup group;
 
-  private String id;
+  private @Nullable String id;
 
   @JsonProperty("likes_count")
   private int likesCount;
@@ -34,41 +50,41 @@ public class QiitaItem {
   @JsonProperty("stocks_count")
   private int stocksCount;
 
-  private List<QiitaTag> tags;
+  private @Nullable List<QiitaTag> tags;
 
-  private String title;
+  private @Nullable String title;
 
   @JsonProperty("updated_at")
-  private String updatedAt;
+  private @Nullable String updatedAt;
 
-  private String url;
+  private @Nullable String url;
 
-  private QiitaUser user;
+  private @Nullable QiitaUser user;
 
   @JsonProperty("page_views_count")
-  private Integer pageViewsCount;
+  private @Nullable Integer pageViewsCount;
 
   @JsonProperty("team_membership")
-  private QiitaTeamMembership teamMembership;
+  private @Nullable QiitaTeamMembership teamMembership;
 
   @JsonProperty("organization_url_name")
-  private String organizationUrlName;
+  private @Nullable String organizationUrlName;
 
   private boolean slide;
 
-  public String getRenderedBody() {
+  public @Nullable String getRenderedBody() {
     return renderedBody;
   }
 
-  public void setRenderedBody(String renderedBody) {
+  public void setRenderedBody(@Nullable String renderedBody) {
     this.renderedBody = renderedBody;
   }
 
-  public String getBody() {
+  public @Nullable String getBody() {
     return body;
   }
 
-  public void setBody(String body) {
+  public void setBody(@Nullable String body) {
     this.body = body;
   }
 
@@ -88,27 +104,27 @@ public class QiitaItem {
     this.commentsCount = commentsCount;
   }
 
-  public String getCreatedAt() {
+  public @Nullable String getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(String createdAt) {
+  public void setCreatedAt(@Nullable String createdAt) {
     this.createdAt = createdAt;
   }
 
-  public QiitaGroup getGroup() {
+  public @Nullable QiitaGroup getGroup() {
     return group;
   }
 
-  public void setGroup(QiitaGroup group) {
+  public void setGroup(@Nullable QiitaGroup group) {
     this.group = group;
   }
 
-  public String getId() {
+  public @Nullable String getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(@Nullable String id) {
     this.id = id;
   }
 
@@ -144,67 +160,67 @@ public class QiitaItem {
     this.stocksCount = stocksCount;
   }
 
-  public List<QiitaTag> getTags() {
+  public @Nullable List<QiitaTag> getTags() {
     return tags;
   }
 
-  public void setTags(List<QiitaTag> tags) {
+  public void setTags(@Nullable List<QiitaTag> tags) {
     this.tags = tags;
   }
 
-  public String getTitle() {
+  public @Nullable String getTitle() {
     return title;
   }
 
-  public void setTitle(String title) {
+  public void setTitle(@Nullable String title) {
     this.title = title;
   }
 
-  public String getUpdatedAt() {
+  public @Nullable String getUpdatedAt() {
     return updatedAt;
   }
 
-  public void setUpdatedAt(String updatedAt) {
+  public void setUpdatedAt(@Nullable String updatedAt) {
     this.updatedAt = updatedAt;
   }
 
-  public String getUrl() {
+  public @Nullable String getUrl() {
     return url;
   }
 
-  public void setUrl(String url) {
+  public void setUrl(@Nullable String url) {
     this.url = url;
   }
 
-  public QiitaUser getUser() {
+  public @Nullable QiitaUser getUser() {
     return user;
   }
 
-  public void setUser(QiitaUser user) {
+  public void setUser(@Nullable QiitaUser user) {
     this.user = user;
   }
 
-  public Integer getPageViewsCount() {
+  public @Nullable Integer getPageViewsCount() {
     return pageViewsCount;
   }
 
-  public void setPageViewsCount(Integer pageViewsCount) {
+  public void setPageViewsCount(@Nullable Integer pageViewsCount) {
     this.pageViewsCount = pageViewsCount;
   }
 
-  public QiitaTeamMembership getTeamMembership() {
+  public @Nullable QiitaTeamMembership getTeamMembership() {
     return teamMembership;
   }
 
-  public void setTeamMembership(QiitaTeamMembership teamMembership) {
+  public void setTeamMembership(@Nullable QiitaTeamMembership teamMembership) {
     this.teamMembership = teamMembership;
   }
 
-  public String getOrganizationUrlName() {
+  public @Nullable String getOrganizationUrlName() {
     return organizationUrlName;
   }
 
-  public void setOrganizationUrlName(String organizationUrlName) {
+  public void setOrganizationUrlName(@Nullable String organizationUrlName) {
     this.organizationUrlName = organizationUrlName;
   }
 

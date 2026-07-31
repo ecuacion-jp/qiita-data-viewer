@@ -34,7 +34,7 @@ public abstract class AgreementBaseBl extends SystemCommonBaseBl<Agreement, Long
   }
 
   public Agreement findAndOptimisticLockingCheck(AgreementBaseRecord rec) {
-    return findAndOptimisticLockingCheck(rec.getIdOfEntityDataType(), rec.getVersionOfEntityDataType());
+    return findAndOptimisticLockingCheck(rec.getIdOfEntityDataType(), rec.getVersionSnapshot() == null || rec.getVersionSnapshot().equals("") ? null : Long.valueOf(rec.getVersionSnapshot()));
   }
 
   /** Is a utility to insert or update an entity. */

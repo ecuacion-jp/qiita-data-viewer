@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{bootstrap/page-search-list-wide}"
+		th:with="
+			title=#{ACC_GENERAL_LIST_TITLE},
+			titleDesc=#{ACC_GENERAL_LIST_TITLE_DESC},
+			needsSearchPane=true
+		">
+
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<div layout:fragment="search-content" th:remove="tag">
+		<div class="row">
+			<div th:replace="~{bootstrap/components-search :: searchText('acc.name', '')}"></div>
+			<div th:replace="~{bootstrap/components-search :: searchText('acc.mailAddress', '')}"></div>
+			<div th:replace="~{bootstrap/components-search :: searchSelectFromBoolean('acc.isValid', '')}"></div>
+		</div>
+	</div>
+
+	<div layout:fragment="list-table-header-content" th:remove="tag">
+		<th th:replace="~{bootstrap/components-list :: headerSortable('accId', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.name', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.mailAddress', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.role', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.isValid', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.isAuthenticated', '')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSortable('acc.hasLoggedIn', '')}"></th>
+		<th th:replace="~{splib-web/app-parts :: listPageHeaderCommonItems}"></th>
+		<th th:replace="~{splib-web/app-parts :: listPageHeaderCommonItemsForAcc}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerSwitchUserButton('')}"></th>
+		<th th:replace="~{bootstrap/components-list :: headerUpdateButton('')}"></th>
+	</div>
+
+	<div layout:fragment="list-table-body-content" th:remove="tag">
+		<tr>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyText('accId', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyText('acc.name', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyText('acc.mailAddress', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyEnumText('acc.role', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyCheckbox('acc.isValid', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyCheckbox('acc.isAuthenticated', '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: listReadOnlyCheckbox('acc.hasLoggedIn', '')}"></td>
+			<td th:replace="~{splib-web/app-parts :: listPageBodyCommonItems}"></td>
+			<td th:replace="~{splib-web/app-parts :: listPageBodyCommonItemsForAcc}"></td>
+			<td th:replace="~{bootstrap/components-list :: switchUserButton(*{acc.mailAddress}, '')}"></td>
+			<td th:replace="~{bootstrap/components-list :: updateButton('')}"></td>
+		</tr>
+	</div>
+
+	<div layout:fragment="bottom-space" th:remove="tag">
+		<td th:replace="~{bootstrap/components-list :: scriptForSwitchUserButton('')}"></td>
+	</div>
+</body>
+</html>
