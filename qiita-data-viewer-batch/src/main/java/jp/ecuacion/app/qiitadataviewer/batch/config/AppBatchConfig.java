@@ -15,8 +15,8 @@
  */
 package jp.ecuacion.app.qiitadataviewer.batch.config;
 
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.batch.tasklet.FetchQiitaItemsTasklet;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import jp.ecuacion.splib.batch.config.SplibAppParentBatchConfig;
 import jp.ecuacion.splib.batch.exceptionhandler.SplibExceptionHandler;
 import jp.ecuacion.splib.batch.listener.SplibJobExecutionListener;
@@ -66,7 +66,7 @@ public class AppBatchConfig extends SplibAppParentBatchConfig {
   @Bean
   Step fetchQiitaItemsJobStep1(JobRepository jobRepository,
       PlatformTransactionManager transactionManager) {
-    return ObjectsUtil.requireNonNull(preparedStepBuilder("fetchQiitaItemsJobStep1", jobRepository,
+    return Objects.requireNonNull(preparedStepBuilder("fetchQiitaItemsJobStep1", jobRepository,
         transactionManager, fetchQiitaItemsTasklet)).build();
   }
 }

@@ -15,11 +15,11 @@
  */
 package jp.ecuacion.app.qiitadataviewer.web.service;
 
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.QiitaItem;
 import jp.ecuacion.app.qiitadataviewer.web.controller.QiitaItemEditController.QiitaItemEditForm;
 import jp.ecuacion.app.qiitadataviewer.web.record.QiitaItemEditRecord;
 import jp.ecuacion.app.qiitadataviewer.web.repository.QiitaItemRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,7 +49,7 @@ public class QiitaItemEditService extends SystemCommonEditService<QiitaItemEditF
     QiitaItem e = repo.findById(form.getQiitaItem().getIdOfEntityDataType()).orElseThrow();
 
     QiitaItemEditRecord rec = new QiitaItemEditRecord(e, getParams());
-    setCreateAndLstUpdAccNames(rec, ObjectsUtil.requireNonNull(loginUser));
+    setCreateAndLstUpdAccNames(rec, Objects.requireNonNull(loginUser));
     form.setQiitaItem(rec);
   }
 

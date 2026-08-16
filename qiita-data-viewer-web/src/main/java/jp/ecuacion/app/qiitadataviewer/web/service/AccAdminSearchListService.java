@@ -16,6 +16,7 @@
 package jp.ecuacion.app.qiitadataviewer.web.service;
 
 import java.util.List;
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.AccAdmin;
 import jp.ecuacion.app.qiitadataviewer.web.bl.AccAdminBl;
 import jp.ecuacion.app.qiitadataviewer.web.controller.AccAdminSearchListController.AccAdminListForm;
@@ -23,7 +24,6 @@ import jp.ecuacion.app.qiitadataviewer.web.controller.AccAdminSearchListControll
 import jp.ecuacion.app.qiitadataviewer.web.record.AccAdminRecord;
 import jp.ecuacion.app.qiitadataviewer.web.record.AccAdminSearchRecord;
 import jp.ecuacion.app.qiitadataviewer.web.repository.AccAdminRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import jp.ecuacion.lib.core.violation.BusinessViolation;
 import jp.ecuacion.lib.core.violation.Violations;
 import jp.ecuacion.splib.web.jpa.util.SpecFactory;
@@ -54,7 +54,7 @@ public class AccAdminSearchListService
   @Override
   public void page(AccAdminSearchForm searchForm, AccAdminListForm listForm,
       @Nullable UserDetails loginUser) {
-    UserDetails nonNullLoginUser = ObjectsUtil.requireNonNull(loginUser);
+    UserDetails nonNullLoginUser = Objects.requireNonNull(loginUser);
     listForm.setRecList(getListFormCommon(searchForm, repo).stream()
         .map(e -> new AccAdminRecord(e, getParams()))
         .peek(rec -> setLstUpdAccName(rec, nonNullLoginUser))

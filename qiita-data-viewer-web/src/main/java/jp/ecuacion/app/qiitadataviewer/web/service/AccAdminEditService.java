@@ -15,13 +15,13 @@
  */
 package jp.ecuacion.app.qiitadataviewer.web.service;
 
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.Acc;
 import jp.ecuacion.app.qiitadataviewer.base.entity.AccAdmin;
 import jp.ecuacion.app.qiitadataviewer.web.bl.AccAdminBl;
 import jp.ecuacion.app.qiitadataviewer.web.controller.AccAdminEditController.AccAdminEditForm;
 import jp.ecuacion.app.qiitadataviewer.web.record.AccAdminEditRecord;
 import jp.ecuacion.app.qiitadataviewer.web.repository.AccAdminRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import jp.ecuacion.lib.core.violation.BusinessViolation;
 import jp.ecuacion.lib.core.violation.Violations;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +56,7 @@ public class AccAdminEditService extends SystemCommonEditService<AccAdminEditFor
 
   @Override
   public void getUpdatePage(AccAdminEditForm form, @Nullable UserDetails loginUser) {
-    UserDetails nonNullLoginUser = ObjectsUtil.requireNonNull(loginUser);
+    UserDetails nonNullLoginUser = Objects.requireNonNull(loginUser);
     AccAdmin e = repo.findById(form.getAccAdmin().getAccIdOfEntityDataType()).orElseThrow();
 
     AccAdminEditRecord rec = new AccAdminEditRecord(e, getParams());

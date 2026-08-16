@@ -24,6 +24,7 @@ import java.net.http.HttpResponse;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.Acc;
 import jp.ecuacion.app.qiitadataviewer.base.entity.QiitaGroup;
 import jp.ecuacion.app.qiitadataviewer.base.entity.QiitaItem;
@@ -38,7 +39,6 @@ import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaItemTagRepository;
 import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaItemTagVersionRepository;
 import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaTagRepository;
 import jp.ecuacion.app.qiitadataviewer.batch.repository.QiitaUserRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import org.jspecify.annotations.Nullable;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.StepContribution;
@@ -150,7 +150,7 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
 
   @SuppressWarnings("null")
   private void saveItem(jp.ecuacion.app.qiitadataviewer.core.model.QiitaItem apiItem, Acc acc) {
-    QiitaUser qiitaUser = upsertQiitaUser(ObjectsUtil.requireNonNull(apiItem.getUser()), acc);
+    QiitaUser qiitaUser = upsertQiitaUser(Objects.requireNonNull(apiItem.getUser()), acc);
     QiitaGroup qiitaGroup =
         apiItem.getGroup() != null ? upsertQiitaGroup(apiItem.getGroup(), acc) : null;
     QiitaItem qiitaItem = upsertQiitaItem(apiItem, acc, qiitaUser, qiitaGroup);
@@ -168,6 +168,8 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
       Acc acc) {
     QiitaUser entity =
         qiitaUserRepository.findByUserIdInQiitaWebsite(src.getId()).orElse(new QiitaUser());
+    Objects.requireNonNull(entity);
+
     entity.setAcc(acc);
     entity.setUserIdInQiitaWebsite(src.getId());
     entity.setPermanentId(src.getPermanentId());
@@ -194,13 +196,17 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
       Acc acc) {
     QiitaGroup entity =
         qiitaGroupRepository.findByUrlName(src.getUrlName()).orElse(new QiitaGroup());
+    Objects.requireNonNull(entity);
+
     entity.setAcc(acc);
     entity.setUrlName(src.getUrlName());
     entity.setName(src.getName());
     entity.setDescription(src.getDescription());
     entity.setIsPrivate(src.isPrivate());
-    entity.setCreatedAt(OffsetDateTime.parse(src.getCreatedAt()));
-    entity.setUpdatedAt(OffsetDateTime.parse(src.getUpdatedAt()));
+    entity.setCreatedAt(src.getCreatedAt() == null ? null
+        : OffsetDateTime.parse(Objects.requireNonNull(src.getCreatedAt())));
+    entity.setUpdatedAt(src.getUpdatedAt() == null ? null
+        : OffsetDateTime.parse(Objects.requireNonNull(src.getUpdatedAt())));
     entity.setCreateAccId(-1L);
     entity.setLstUpdAccId(-1L);
     return qiitaGroupRepository.save(entity);
@@ -238,6 +244,8 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
   private QiitaTag upsertQiitaTag(jp.ecuacion.app.qiitadataviewer.core.model.QiitaTag src,
       Acc acc) {
     QiitaTag entity = qiitaTagRepository.findByName(src.getName()).orElse(new QiitaTag());
+    Objects.requireNonNull(entity);
+
     entity.setAcc(acc);
     entity.setName(src.getName());
     entity.setCreateAccId(-1L);
@@ -249,6 +257,8 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
     QiitaItemTag entity =
         qiitaItemTagRepository.findByQiitaItem_IdAndQiitaTag_Id(qiitaItem.getId(), qiitaTag.getId())
             .orElse(new QiitaItemTag());
+    Objects.requireNonNull(entity);
+
     entity.setAcc(acc);
     entity.setQiitaItem(qiitaItem);
     entity.setQiitaTag(qiitaTag);
@@ -271,6 +281,8 @@ public class FetchQiitaItemsTasklet extends SystemCommonTasklet implements Taskl
     for (String version : apiTag.getVersions()) {
       if (!existingNames.contains(version)) {
         QiitaItemTagVersion entity = new QiitaItemTagVersion();
+        Objects.requireNonNull(entity);
+
         entity.setAcc(acc);
         entity.setQiitaItemTag(qiitaItemTag);
         entity.setVersionName(version);

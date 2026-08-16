@@ -40,12 +40,10 @@ public class AccBl extends AccBaseBl {
     return getAcc(loginUser).getAccAdmin();
   }
 
-  @SuppressWarnings("null")
   public Map<Long, String> getAccNameMapForAccGeneral() {
     return repo.findAll().stream().collect(Collectors.toMap(Acc::getId, Acc::getName));
   }
 
-  @SuppressWarnings("null")
   public Map<Long, String> getAccNameMapForAccAdmin() {
     return repo.findAll().stream().collect(Collectors.toMap(Acc::getId, Acc::getName));
   }

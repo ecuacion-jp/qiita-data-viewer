@@ -15,11 +15,11 @@
  */
 package jp.ecuacion.app.qiitadataviewer.web.service;
 
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.AccGeneral;
 import jp.ecuacion.app.qiitadataviewer.web.controller.AccGeneralEditController.AccGeneralEditForm;
 import jp.ecuacion.app.qiitadataviewer.web.record.AccGeneralEditRecord;
 import jp.ecuacion.app.qiitadataviewer.web.repository.AccGeneralRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,7 +47,7 @@ public class AccGeneralEditService
 
   @Override
   public void getUpdatePage(AccGeneralEditForm form, @Nullable UserDetails loginUser) {
-    UserDetails nonNullLoginUser = ObjectsUtil.requireNonNull(loginUser);
+    UserDetails nonNullLoginUser = Objects.requireNonNull(loginUser);
     AccGeneral e = repo.findById(form.getAccGeneral().getAccIdOfEntityDataType()).orElseThrow();
 
     AccGeneralEditRecord rec = new AccGeneralEditRecord(e, getParams());

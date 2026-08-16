@@ -16,12 +16,12 @@
 package jp.ecuacion.app.qiitadataviewer.web.service;
 
 import java.util.List;
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.QiitaItem;
 import jp.ecuacion.app.qiitadataviewer.web.controller.QiitaItemSearchListController.QiitaItemListForm;
 import jp.ecuacion.app.qiitadataviewer.web.controller.QiitaItemSearchListController.QiitaItemSearchForm;
 import jp.ecuacion.app.qiitadataviewer.web.record.QiitaItemRecord;
 import jp.ecuacion.app.qiitadataviewer.web.repository.QiitaItemRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import jp.ecuacion.splib.web.jpa.util.SpecFactory;
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Scope;
@@ -47,7 +47,7 @@ public class QiitaItemSearchListService
   @Override
   public void page(QiitaItemSearchForm searchForm, QiitaItemListForm listForm,
       @Nullable UserDetails loginUser) {
-    UserDetails nonNullLoginUser = ObjectsUtil.requireNonNull(loginUser);
+    UserDetails nonNullLoginUser = Objects.requireNonNull(loginUser);
     @SuppressWarnings("null")
     List<QiitaItemRecord> list = getListFormCommon(searchForm, repo).getContent().stream()
         .map(e -> new QiitaItemRecord(e, getParams()))

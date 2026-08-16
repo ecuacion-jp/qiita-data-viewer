@@ -16,13 +16,13 @@
 package jp.ecuacion.app.qiitadataviewer.web.service;
 
 import java.util.List;
+import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.base.entity.AccGeneral;
 import jp.ecuacion.app.qiitadataviewer.web.controller.AccGeneralSearchListController.AccGeneralListForm;
 import jp.ecuacion.app.qiitadataviewer.web.controller.AccGeneralSearchListController.AccGeneralSearchForm;
 import jp.ecuacion.app.qiitadataviewer.web.record.AccGeneralRecord;
 import jp.ecuacion.app.qiitadataviewer.web.record.AccGeneralSearchRecord;
 import jp.ecuacion.app.qiitadataviewer.web.repository.AccGeneralRepository;
-import jp.ecuacion.lib.core.util.ObjectsUtil;
 import jp.ecuacion.splib.web.jpa.util.SpecFactory;
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Scope;
@@ -48,7 +48,7 @@ public class AccGeneralSearchListService
   @Override
   public void page(AccGeneralSearchForm searchForm, AccGeneralListForm listForm,
       @Nullable UserDetails loginUser) {
-    UserDetails nonNullLoginUser = ObjectsUtil.requireNonNull(loginUser);
+    UserDetails nonNullLoginUser = Objects.requireNonNull(loginUser);
     @SuppressWarnings("null")
     List<AccGeneralRecord> list = getListFormCommon(searchForm, repo).stream()
         .map(e -> new AccGeneralRecord(e, getParams()))
@@ -60,7 +60,7 @@ public class AccGeneralSearchListService
 
   @Override
   protected Specification<AccGeneral> getSpecs(AccGeneralSearchForm searchForm) {
-    AccGeneralSearchRecord rec = ObjectsUtil.requireNonNull(searchForm.getRec());
+    AccGeneralSearchRecord rec = Objects.requireNonNull(searchForm.getRec());
 
     SpecFactory<AccGeneral> specFct = new SpecFactory<>();
     List<Specification<AccGeneral>> list = specFct.addExplicitSearchConditions(rec);
@@ -71,7 +71,7 @@ public class AccGeneralSearchListService
   @Override
   public void delete(AccGeneralListForm listForm, UserDetails loginUser) throws Exception {
     // Not reachable from the UI (no delete button); soft delete kept for contract completeness.
-    AccGeneralRecord rec = ObjectsUtil.requireNonNull(listForm.getRec());
+    AccGeneralRecord rec = Objects.requireNonNull(listForm.getRec());
     AccGeneral e = repo.findById(rec.getAccIdOfEntityDataType()).orElseThrow();
     e.setDelFlg(true);
   }
