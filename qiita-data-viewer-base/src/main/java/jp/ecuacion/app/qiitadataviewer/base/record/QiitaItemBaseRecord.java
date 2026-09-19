@@ -1,18 +1,3 @@
-/*
- * Copyright © 2012 ecuacion.jp (info@ecuacion.jp)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package jp.ecuacion.app.qiitadataviewer.base.record;
 
 import jakarta.validation.Valid;
@@ -56,7 +41,7 @@ public abstract class QiitaItemBaseRecord extends SystemCommonBaseRecord impleme
   protected String title;
   protected String updatedAt;
   @SizeString(min = 1, max = 500)
-  @PatternWithDescription(regexp = "^[^'$%&\\\\(\\\\)\\\\^~,<>\\\\?]*$", description = "longUrl")
+  @PatternWithDescription(regexp = "^[^'$%&\\(\\)\\^~,<>\\?]*$", description = "longUrl")
   protected String url;
   @Valid
   protected QiitaUserBaseRecord qiitaUser;
@@ -448,24 +433,27 @@ public abstract class QiitaItemBaseRecord extends SystemCommonBaseRecord impleme
     setId(ids[0]);
   }
 
-  public String getVersionSnapshot() {
-    return getSnapshotSegment(getOptimisticLockVersions(), 0);
-  }
-
   public String getQiitaGroupIdSnapshot() {
     return getSnapshotSegment(getIds(), 1);
-  }
-
-  public String getQiitaGroupVersionSnapshot() {
-    return getSnapshotSegment(getOptimisticLockVersions(), 1);
   }
 
   public String getQiitaUserIdSnapshot() {
     return getSnapshotSegment(getIds(), 2);
   }
 
-  public String getQiitaUserVersionSnapshot() {
-    return getSnapshotSegment(getOptimisticLockVersions(), 2);
+  @Override
+  public void setOptimisticLockVersions(String verCsv) {
+    super.setOptimisticLockVersions(verCsv);
+    String[] vers = verCsv.split(",", -1);
+    if (vers.length < 1) return;
+
+    setVersion(vers[0]);
+    if (getQiitaGroup() != null && vers.length > 1) {
+      getQiitaGroup().setVersion(vers[1]);
+    }
+    if (getQiitaUser() != null && vers.length > 2) {
+      getQiitaUser().setVersion(vers[2]);
+    }
   }
 
 }

@@ -18,7 +18,7 @@ package jp.ecuacion.app.qiitadataviewer.batch.config;
 import java.util.Objects;
 import jp.ecuacion.app.qiitadataviewer.batch.tasklet.FetchQiitaItemsTasklet;
 import jp.ecuacion.splib.batch.config.SplibAppParentBatchConfig;
-import jp.ecuacion.splib.batch.exceptionhandler.SplibExceptionHandler;
+import jp.ecuacion.splib.batch.exceptionhandler.SplibBatchExceptionHandler;
 import jp.ecuacion.splib.batch.listener.SplibJobExecutionListener;
 import jp.ecuacion.splib.batch.listener.SplibStepExecutionListener;
 import org.springframework.batch.core.job.Job;
@@ -40,7 +40,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class AppBatchConfig extends SplibAppParentBatchConfig {
 
   public AppBatchConfig(SplibJobExecutionListener jobExecutionListener,
-      SplibStepExecutionListener stepExecutionListener, SplibExceptionHandler exceptionHandler) {
+      SplibStepExecutionListener stepExecutionListener,
+      SplibBatchExceptionHandler exceptionHandler) {
     super(jobExecutionListener, stepExecutionListener, exceptionHandler);
   }
 

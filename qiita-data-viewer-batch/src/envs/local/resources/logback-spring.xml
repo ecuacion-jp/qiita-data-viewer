@@ -19,19 +19,17 @@
 <!DOCTYPE xml>
 <configuration>
   <!-- profile-independent properties -->
-  <include resource="logback-spring-profile-independent-properties.xml" />
+  <include resource="logback-spring-app-common.xml" />
 
   <!-- appenders -->
   <property name="log-dir" value="./target/logs" />
-  <include resource="logback-spring-appenders.xml" />
   <include resource="logback-spring-appenders-batch.xml" />
-  <include resource="logback-spring-appenders-local.xml" />
 
   <!-- loggers -->
   <property name="loglevel-jp.ecuacion" value="DEBUG" />
   <property name="loglevel-security" value="INFO" />
   <property name="loglevel-sql" value="INFO" />
   <property name="loglevel-root" value="INFO" />
-  <include resource="logback-spring-loggers-for-local.xml" />
-  <include resource="logback-spring-loggers-batch-for-local.xml" />
+  <include resource="logback-spring-loggers-batch-to-console-and-files.xml" />
+  <include resource="logback-spring-loggers-rest-to-console-and-files.xml" />
 </configuration>
