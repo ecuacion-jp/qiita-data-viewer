@@ -16,8 +16,8 @@
 package jp.ecuacion.app.qiitadataviewer.batch.exceptionhandler;
 
 import java.util.Objects;
-import jp.ecuacion.lib.core.util.MailUtil;
 import jp.ecuacion.splib.core.exceptionhandler.SplibExceptionHandlerAction;
+import jp.ecuacion.splib.core.util.SplibMailUtil;
 import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +25,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppExceptionHandlerAction implements SplibExceptionHandlerAction {
 
+  private final SplibMailUtil splibMailUtil;
+
+  /** Constructs a new instance. */
+  public AppExceptionHandlerAction(SplibMailUtil splibMailUtil) {
+    this.splibMailUtil = splibMailUtil;
+  }
+
   @Override
   public void execute(@Nullable Throwable th) {
-    MailUtil.sendErrorMail(Objects.requireNonNull(th));
+    splibMailUtil.sendErrorMail(Objects.requireNonNull(th));
   }
 }

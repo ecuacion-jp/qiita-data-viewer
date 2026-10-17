@@ -15,15 +15,22 @@
  */
 package jp.ecuacion.app.qiitadataviewer.web.exceptionhandler;
 
-import jp.ecuacion.lib.core.util.MailUtil;
 import jp.ecuacion.splib.core.exceptionhandler.SplibExceptionHandlerAction;
+import jp.ecuacion.splib.core.util.SplibMailUtil;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ActionOnThrowable implements SplibExceptionHandlerAction {
 
+  private final SplibMailUtil splibMailUtil;
+
+  /** Constructs a new instance. */
+  public ActionOnThrowable(SplibMailUtil splibMailUtil) {
+    this.splibMailUtil = splibMailUtil;
+  }
+
   @Override
   public void execute(Throwable th) {
-    MailUtil.sendErrorMail(th);
+    splibMailUtil.sendErrorMail(th);
   }
 }
