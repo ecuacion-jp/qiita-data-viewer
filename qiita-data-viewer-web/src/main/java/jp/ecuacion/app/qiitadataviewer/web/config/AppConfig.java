@@ -17,21 +17,20 @@ package jp.ecuacion.app.qiitadataviewer.web.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
-import jp.ecuacion.splib.web.config.SplibWebConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /** Web app wide configuration. */
 @Configuration
 @EnableJpaRepositories("jp.ecuacion.app.qiitadataviewer.web.repository")
-@ComponentScan("jp.ecuacion.app.qiitadataviewer.core.config")
-// SplibWebConfig itself carries the @ComponentScan that registers ecuacion-splib-web's own
-// controllers (login, error pages, etc.) - nothing in the framework imports it automatically.
-@Import(SplibWebConfig.class)
+// jp.ecuacion.splib.web.config: SplibWebConfig there carries the @ComponentScan that registers
+// ecuacion-splib-web's own controllers (login, error pages, etc.) - nothing in the framework
+// loads it automatically.
+@ComponentScan(basePackages = "jp.ecuacion.splib.web.config"
+    + ",jp.ecuacion.app.qiitadataviewer.core.config")
 public class AppConfig {
 
   public static final String SESSION_KEY_LOGIN_USER_ID = "loginUserId";

@@ -15,21 +15,17 @@
  */
 package jp.ecuacion.app.qiitadataviewer.web.record;
 
-import static jp.ecuacion.splib.web.bean.StringMatchingConditionBean.StringMatchingPatternEnum.PARTIAL;
 import jp.ecuacion.app.qiitadataviewer.base.entity.AccAdmin;
 import jp.ecuacion.app.qiitadataviewer.base.record.AccAdminBaseRecord;
 import jp.ecuacion.app.qiitadataviewer.web.constant.Constants;
 import jp.ecuacion.splib.core.container.DatetimeFormatParameters;
 import jp.ecuacion.splib.web.item.HtmlItem;
 import jp.ecuacion.splib.web.item.HtmlItemContainer;
-import jp.ecuacion.splib.web.item.HtmlItemString;
 
+@SuppressWarnings("null")
 public class AccAdminRecord extends AccAdminBaseRecord implements HtmlItemContainer {
 
-  static final HtmlItem[] htmlItems = new HtmlItem[] {
-      new HtmlItemString("acc.mailAddress").notEmpty().stringMatchingCondition(PARTIAL, true),
-      new HtmlItemString("acc.name").notEmpty().stringMatchingCondition(PARTIAL, true),
-      new HtmlItem("acc.role").notEmpty()};
+  static final HtmlItem[] htmlItems = new HtmlItem[] {};
 
   public AccAdminRecord() {
     super();

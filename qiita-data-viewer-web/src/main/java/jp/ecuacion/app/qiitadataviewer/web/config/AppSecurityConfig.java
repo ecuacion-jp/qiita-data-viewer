@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.ecuacion.app.qiitadataviewer.base.enums.AccRoleEnum;
 import jp.ecuacion.splib.core.bean.AuthorizationBean;
-import jp.ecuacion.splib.web.config.SplibWebSecurityConfig;
+import jp.ecuacion.splib.web.config.SplibOauth2WebSecurityConfig;
 import jp.ecuacion.splib.web.oauth2.SplibAppleClientSecretService;
 import jp.ecuacion.splib.web.oauth2.SplibOauth2AuthSuccessHandler;
 import org.jspecify.annotations.Nullable;
@@ -30,11 +30,11 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 /** Security configuration for general (Google / Apple OAuth2) login. */
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
-public class AppSecurityConfig extends SplibWebSecurityConfig {
+public class AppSecurityConfig extends SplibOauth2WebSecurityConfig {
 
-  protected AppSecurityConfig(@Nullable SplibOauth2AuthSuccessHandler oauth2SuccessHandler,
+  protected AppSecurityConfig(SplibOauth2AuthSuccessHandler oauth2SuccessHandler,
       @Nullable SplibAppleClientSecretService appleClientSecretService,
-      @Nullable ClientRegistrationRepository clientRegistrationRepository) {
+      ClientRegistrationRepository clientRegistrationRepository) {
     super(oauth2SuccessHandler, appleClientSecretService, clientRegistrationRepository);
   }
 

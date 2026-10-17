@@ -78,6 +78,12 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
+		<!-- ecuacion-lib -->
+		<dependency>
+			<groupId>jp.ecuacion.lib</groupId>
+			<artifactId>ecuacion-lib-validation-business-messages</artifactId>
+		</dependency>
+
 		<!-- dependent modules in the same project -->
 		<dependency>
 			<groupId>jp.ecuacion.app.${app.name}</groupId>

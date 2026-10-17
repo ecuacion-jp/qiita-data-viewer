@@ -1,3 +1,0 @@
-prod
-
-# Write profiles down available with space separated valies format at the first line.

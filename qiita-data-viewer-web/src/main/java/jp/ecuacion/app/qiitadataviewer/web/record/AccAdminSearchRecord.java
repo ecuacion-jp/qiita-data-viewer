@@ -26,9 +26,9 @@ import jp.ecuacion.splib.web.item.HtmlItemString;
 public class AccAdminSearchRecord extends AccAdminRecord {
 
   static final HtmlItem[] htmlItems = new HtmlItem[] {
-      new HtmlItemString("acc.mailAddress").notEmpty().stringMatchingCondition(PARTIAL, true),
-      new HtmlItemString("acc.name").notEmpty().stringMatchingCondition(PARTIAL, true),
-      new HtmlItem("acc.role").notEmpty(),
+      new HtmlItemString("acc.mailAddress").stringMatchingCondition(PARTIAL, true),
+      new HtmlItemString("acc.name").stringMatchingCondition(PARTIAL, true),
+      new HtmlItem("acc.role"),
       new HtmlItemSelect("acc.isValid").itemNameKey("acc.isValidOrNot")};
 
   public AccAdminSearchRecord() {

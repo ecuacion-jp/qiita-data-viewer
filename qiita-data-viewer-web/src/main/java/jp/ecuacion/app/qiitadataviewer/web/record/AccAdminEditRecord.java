@@ -20,6 +20,7 @@ import jp.ecuacion.app.qiitadataviewer.base.entity.AccAdmin;
 import jp.ecuacion.app.qiitadataviewer.web.constant.Constants;
 import jp.ecuacion.splib.core.container.DatetimeFormatParameters;
 import jp.ecuacion.splib.web.item.HtmlItem;
+import jp.ecuacion.splib.web.item.HtmlItemString;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -30,7 +31,8 @@ import org.jspecify.annotations.Nullable;
 public class AccAdminEditRecord extends AccAdminRecord {
 
   static final HtmlItem[] htmlItems =
-      new HtmlItem[] {new HtmlItem("rawPassword").hideValue()};
+      new HtmlItem[] {new HtmlItemString("acc.mailAddress").notEmpty(),
+          new HtmlItemString("acc.name").notEmpty(), new HtmlItem("rawPassword").hideValue()};
 
   @Size(min = 8, max = 64)
   private @Nullable String rawPassword;
